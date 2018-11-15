@@ -1,26 +1,26 @@
 resource "google_compute_instance" "default" {
-	name = "jenkins"
-	machine_type = "n1-standard-1"
-	zone = "europe-north1-b"
+	name = "${var.name}"
+	machine_type = "${var.machine_type}"
+	zone = "${var.zone}"
 	tags = ["jenkins", "http-server"]
 	boot_disk {
 		initialize_params {
-			image = "centos-7"
+			image = "${var.image}"
 		}
 	}
 	network_interface {
-		network = "default"
+		network = "${var.network}"
 		access_config {
 			// Ephemeral IP
 		}
 	}
 	metadata {
-		sshKeys = "terraform:${file("~/.ssh/id_rsa.pub")}"
+		sshKeys = "${var.ssh_user}:${file("${var.public_key}")}"
 	}
 	connection = {
 		type = "ssh"
-		user = "terraform"
-		private_key = "${file("~/.ssh/id_rsa")}"
+		user = "${var.ssh_user}"
+		private_key = "${file("${var.private_key}")}"
 	}
 	provisioner "remote-exec" {
 		inline = [
@@ -29,7 +29,7 @@ resource "google_compute_instance" "default" {
 	}
 	provisioner "remote-exec" {
 		scripts = [
-			"scripts/jenkins-script"
+			"${var.scripts}"
 		]
 	}
 }
