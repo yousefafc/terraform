@@ -2,7 +2,7 @@ resource "google_compute_instance" "default" {
 	name = "jenkins"
 	machine_type = "n1-standard-1"
 	zone = "europe-north1-b"
-	tags = ["jenkins"]
+	tags = ["jenkins", "http-server"]
 	boot_disk {
 		initialize_params {
 			image = "centos-7"
@@ -27,10 +27,9 @@ resource "google_compute_instance" "default" {
 			"sudo yum install -y java"
 		]
 	}
-        provisioner "remote-exec" {
+	provisioner "remote-exec" {
 		scripts = [
-			"jenkins-script"
+			"scripts/jenkins-script"
 		]
 	}
-
 }
