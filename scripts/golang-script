@@ -1,0 +1,7 @@
+sudo yum install -y go
+cp /terraform/GoLang.service /etc/systemd/system/GoLang.service
+mkdir -p /opt/GoLang
+cp /terraform/main /opt/GoLang
+cp -r /terraform/static /opt/GoLang
+systemctl daemon-reload
+

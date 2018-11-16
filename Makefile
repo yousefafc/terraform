@@ -12,8 +12,8 @@ jenkins-apply:
 jenkins-destroy:
 	@"${TERRAFORM_DESTROY}${VAR_DIR}"/jenkins.tfvars
 
-python-systemd-http-server-apply:
-	@"${TERRAFORM_APPLY}${VAR_DIR}"/python-systemd-http-server.tfvars
+golang-apply:
+	@"${TERRAFORM_APPLY}${VAR_DIR}"/golang.tfvars
 
-python-systemd-http-server-destroy:
-	@"${TERRAFORM_APPLY}${VAR_DIR}"/python-systemd-http-server.tfvar
+golang-destroy:
+	@"${TERRAFORM_DESTROY}${VAR_DIR}"/golang.tfvar
